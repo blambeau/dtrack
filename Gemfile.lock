@@ -1,0 +1,78 @@
+GIT
+  remote: git://github.com/alf-tool/alf-core
+  revision: 2220e69dda6536e4e6be3568558ead0be84c1163
+  specs:
+    alf-core (0.16.3)
+      domain (~> 1.0)
+      myrrha (~> 3.0)
+      path (~> 1.3)
+      sexpr (~> 0.6.0)
+
+GIT
+  remote: git://github.com/alf-tool/alf-sequel
+  revision: ca4c06700929c41d1db36a629a6f689ef1a4dc67
+  specs:
+    alf-sequel (0.16.3)
+      alf-core (= 0.16.3)
+      alf-sql (= 0.16.3)
+      sequel (~> 4.2)
+
+GIT
+  remote: git://github.com/alf-tool/alf-sql
+  revision: 237a09017255df4790141cc7812b888822e03278
+  specs:
+    alf-sql (0.16.3)
+      alf-core (= 0.16.3)
+      sexpr (~> 0.6.0)
+
+PATH
+  remote: /Users/blambeau/work/devel/finitio-rb
+  specs:
+    finitio (0.5.0)
+      citrus (>= 2.4, < 4.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    citrus (3.0.1)
+    diff-lcs (1.2.5)
+    domain (1.0.0)
+    highline (1.6.21)
+    myrrha (3.0.0)
+      domain (~> 1.0)
+    mysql (2.9.1)
+    path (1.3.3)
+    pg (0.17.1)
+    quickl (0.4.3)
+    rake (10.3.2)
+    rspec (3.0.0)
+      rspec-core (~> 3.0.0)
+      rspec-expectations (~> 3.0.0)
+      rspec-mocks (~> 3.0.0)
+    rspec-core (3.0.3)
+      rspec-support (~> 3.0.0)
+    rspec-expectations (3.0.3)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.0.0)
+    rspec-mocks (3.0.3)
+      rspec-support (~> 3.0.0)
+    rspec-support (3.0.3)
+    sequel (4.13.0)
+    sexpr (0.6.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  alf-core!
+  alf-sequel!
+  alf-sql!
+  finitio!
+  highline
+  mysql
+  path
+  pg
+  quickl
+  rake (~> 10.3)
+  rspec (~> 3.0)
+  sequel (~> 4.12)

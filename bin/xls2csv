@@ -1,0 +1,40 @@
+#!/usr/bin/env ruby
+require 'path'
+
+SOFFICE = "/Applications/LibreOffice.app/Contents/MacOS/soffice"
+
+unless ARGV.size > 0 && ARGV.size <= 2
+  puts "Usage xls2csv SOURCE [TARGET]"
+  exit
+end
+
+def exists!(file)
+  unless file.exists?
+    puts "No such file: #{file}"
+    exit
+  end
+  file
+end
+
+def source
+  exists! Path(ARGV[0])
+end
+
+def target
+  Path(ARGV[1] || source.sub_ext('.csv'))
+end
+
+def shell(cmd)
+  puts cmd
+  system(cmd)
+end
+
+Path.tmpdir do |temp|
+  # convert with open-office
+  cmd = %Q{#{SOFFICE} --headless --convert-to csv "#{source}" --outdir "#{temp}"}
+  shell(cmd)
+
+  # convert encoding to UTF-8
+  cmd = %Q{iconv -f ISO8859-1 -t UTF-8 "#{temp/target.basename}" > "#{target}"}
+  shell(cmd)
+end

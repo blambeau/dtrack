@@ -1,0 +1,64 @@
+EventId    = String( s | s =~ /^[a-z]+[a-zA-Z]*$/ )
+Denotation = String( s | s.size > 0 )
+Schema     = String
+Sql        = String
+Event      = <info> {
+  event      : EventId
+  denotation : Denotation
+  schema     : Schema
+  formaldef  : Sql
+}
+
+ServerName   = String( s | s =~ /^[a-z][a-z-]+$/ )
+Handler      = String( s | s =~ /^(mysql|pgsql)$/ )
+Host         = String( s | s.size > 0 )
+Port         = Integer( i | i > 0 )
+Username     = String( s | s.size > 0 )
+Password     = String( s | s.size > 0 )
+Server = <info> {
+  server   :  ServerName
+  handler  :  Handler
+  host     :  Host
+  port     :? Port
+  user     :? Username
+  password :? Password
+  admin    :? Username
+  admin_password :? Password
+}
+
+DeploymentId = String( s | s =~ /^[a-z]+$/ )
+DatabaseName = String( s | s.size > 0 )
+Deployment = 
+  <explicit> {
+    deployment :  DeploymentId
+    handler    :  Handler
+    host       :  Host
+    port       :? Port
+    database   :  DatabaseName
+    user       :  Username
+    password   :? Password
+  }
+  <server> {
+    deployment :  DeploymentId
+    server     :  ServerName
+    port       :? Port
+    database   :  DatabaseName
+    user       :? Username
+    password   :? Password
+  }
+
+DsourceId = String( s | s =~ /^[a-z.]+$/ )
+Label     = String( s | s.size > 0 )
+Path      = String( s | s.size > 0 )
+Dsource   = <info> {
+  dsource     :  DsourceId
+  label       :  Label
+  deployments :? [Deployment]
+  events      :? [Event]
+}
+
+Realm = <info> {
+  root        : .Path
+  servers     : [Server]
+  datasources : [Dsource]
+}

@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+begin
+  require 'data_track/command'
+rescue LoadError
+  $:.unshift File.expand_path('../../lib', __FILE__)
+  require 'bundler/setup'
+  require 'data_track/command'
+end
+DataTrack::Command.run(ARGV)
